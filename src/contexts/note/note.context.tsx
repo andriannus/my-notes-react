@@ -11,10 +11,10 @@ import {
   useState,
 } from "react";
 
+import { transformToISOFormat } from "@/utils/date";
+
 import { DEFAULT_NOTES } from "./note.constant";
 import { INote, INoteContext } from "./note.model";
-
-import { transformToISOFormat } from "@/utils/date";
 
 export const NoteContext = createContext<INoteContext>({
   archiveNote: () => null,
