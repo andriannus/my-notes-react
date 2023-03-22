@@ -1,26 +1,45 @@
+import { useQuery } from "@tanstack/react-query";
 import { FC, useCallback } from "react";
 import { Helmet } from "react-helmet-async";
 
 import { AppBar, DeleteNoteDialog, Notes, SuccessToast } from "@/components";
-import { useNote } from "@/contexts";
+import { Note, useAuth } from "@/contexts";
+import { useAPIInvoker } from "@/hooks";
+import { Response } from "@/models";
+
+import { useNotes } from "../notes.hook";
 
 const Archives: FC = () => {
-  const { archivedNotes, deleteNote, unarchiveNote } = useNote();
+  const { authHeaders } = useAuth();
+  const { deleteNote, unarchiveNote } = useNotes();
+  const { apiInvoker } = useAPIInvoker({ headers: authHeaders });
+
+  const { data: notes = [], refetch } = useQuery(
+    ["archived-notes"],
+    async () => {
+      const { data: Data } = await apiInvoker.get<Response<Note[]>>(
+        "/notes/archived"
+      );
+      return Data.data;
+    }
+  );
 
   const handleNoteUnarchive = useCallback(
-    (noteId: string) => {
-      unarchiveNote(noteId);
+    async (noteID: string) => {
+      await unarchiveNote(noteID);
+      await refetch();
       SuccessToast("Catatan berhasil dipindah");
     },
     [unarchiveNote]
   );
 
   const handleNoteDelete = useCallback(
-    async (noteId: string) => {
+    async (noteID: string) => {
       const result = await DeleteNoteDialog();
 
       if (result.isConfirmed) {
-        deleteNote(noteId);
+        await deleteNote(noteID);
+        await refetch();
         SuccessToast("Catatan berhasil dihapus");
       }
     },
@@ -41,7 +60,7 @@ const Archives: FC = () => {
       <main className="Container">
         <Notes
           emptyText="Catatan yang kamu arsipkan muncul di sini."
-          notes={archivedNotes}
+          notes={notes}
           onDelete={handleNoteDelete}
           onUnarchive={handleNoteUnarchive}
         />

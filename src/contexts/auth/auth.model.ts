@@ -1,3 +1,5 @@
+import { AxiosRequestConfig } from "axios";
+
 export interface UserLoggedIn {
   email: string;
   id: string;
@@ -6,6 +8,7 @@ export interface UserLoggedIn {
 
 export interface AuthContext {
   accessToken: string | null;
+  authHeaders: AxiosRequestConfig;
   logout(): void;
   user: UserLoggedIn | null;
 }
