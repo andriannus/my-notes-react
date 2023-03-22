@@ -1,0 +1,13 @@
+.AuthLayout {
+  @apply flex flex-col;
+
+  height: calc(100vh - 56px - 24px);
+
+  &-body {
+    @apply flex-grow px-bs;
+  }
+
+  &-footer {
+    @apply mx-bs mb-bs;
+  }
+}

@@ -1,0 +1,97 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  @apply bg-gray-100;
+}
+
+.Container {
+  @media screen and (max-width: theme("screens.md")) {
+    @apply mb-bs mx-bs;
+  }
+}
+
+.Note {
+  @apply border border-gray-300 bg-white mb-bs;
+  @apply cursor-pointer rounded-xs transition duration-300;
+
+  &:hover {
+    @apply drop-shadow-md;
+
+    > .Note-actions {
+      @media screen and (min-width: theme("screens.lg")) {
+        @apply opacity-100 visible;
+      }
+    }
+  }
+
+  &-column {
+    @apply bg-clip-padding;
+
+    padding-left: 16px;
+  }
+
+  &-title {
+    @apply font-semibold text-base px-bs pb-xs pt-sm;
+  }
+
+  &-content {
+    @apply text-sm px-bs py-xs;
+  }
+
+  &-actions {
+    @apply flex;
+
+    @media screen and (min-width: theme("screens.lg")) {
+      @apply invisible opacity-0 transition-all duration-300;
+    }
+  }
+
+  &-action {
+    @apply font-semibold text-gray-500 px-bs py-xs w-full text-xs transition duration-300;
+
+    -webkit-tap-highlight-color: transparent;
+
+    &:first-child {
+      @apply rounded-bl-xs;
+    }
+
+    &:last-child {
+      @apply rounded-br-xs;
+    }
+
+    &:hover {
+      @apply bg-gray-200;
+    }
+  }
+
+  &-createdAt {
+    @apply block mt-bs text-gray-500 text-right text-xs;
+  }
+
+  &.is-readOnly {
+    &:hover {
+      @apply drop-shadow-none;
+    }
+  }
+}
+
+.Notes {
+  @apply flex w-auto;
+
+  margin-left: -16px;
+}
+
+.Link {
+  @apply cursor-pointer text-ruby-500 text-xs;
+
+  -webkit-tap-highlight-color: transparent;
+
+  &:active,
+  &:focus {
+    @apply text-ruby-200;
+  }
+}
+
+@import "sweetalert2/src/sweetalert2";
