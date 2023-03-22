@@ -10,7 +10,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 import { App } from "@/app";
-import { NoteProvider } from "@/contexts";
+import { AuthProvider, NoteProvider } from "@/contexts";
 
 import "./main.scss";
 
@@ -23,9 +23,11 @@ createRoot(root).render(
   <StrictMode>
     <Suspense>
       <HelmetProvider>
-        <NoteProvider>
-          <App />
-        </NoteProvider>
+        <AuthProvider>
+          <NoteProvider>
+            <App />
+          </NoteProvider>
+        </AuthProvider>
       </HelmetProvider>
     </Suspense>
   </StrictMode>
