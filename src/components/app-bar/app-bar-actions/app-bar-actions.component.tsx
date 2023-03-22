@@ -12,16 +12,6 @@ const AppBarActions: FC = () => {
   return (
     <div className="AppBarActions">
       <Link
-        id="LnkSearch"
-        aria-label="Search"
-        className="AppBarActions-button"
-        role="button"
-        to="/notes/search"
-      >
-        <FontAwesomeIcon icon="search" />
-      </Link>
-
-      <Link
         id="LnkArchives"
         aria-label="Archives"
         className="AppBarActions-button"
