@@ -9,7 +9,8 @@ import { AuthLayout } from "../components";
 import { useLogin } from "./login.hook";
 
 const Login: FC = () => {
-  const { formState, register, values } = useLogin();
+  const { formState, handleLoginFormSubmit, handleSubmit, register, values } =
+    useLogin();
 
   return (
     <>
@@ -21,7 +22,7 @@ const Login: FC = () => {
         <AppBar.Title>Masuk</AppBar.Title>
       </AppBar>
 
-      <form>
+      <form onSubmit={handleSubmit(handleLoginFormSubmit)}>
         <AuthLayout>
           <AuthLayout.Body>
             <TextField
@@ -62,7 +63,7 @@ const Login: FC = () => {
               color="primary"
               disabled={!formState.isValid}
               fullWidth
-              type="button"
+              type="submit"
             >
               Masuk
             </Button>
