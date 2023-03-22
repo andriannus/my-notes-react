@@ -9,16 +9,15 @@ import { API } from "@/constants";
 
 import { APIInvokerConfig, APIInvokerHook } from "./api-invoker.model";
 
-export function useAPIInvoker({
-  baseUrl = "",
-  headers = {},
-}: Partial<APIInvokerConfig>): APIInvokerHook {
-  const [cancelSource, setCancelSource] = useState({} as CancelTokenSource);
+export function useAPIInvoker(
+  config?: Partial<APIInvokerConfig>
+): APIInvokerHook {
+  const [cancelSource, setCancelSource] = useState<CancelTokenSource>();
 
   const apiInvoker = axios.create({
-    baseURL: baseUrl || API.BASE_URL,
+    baseURL: config?.baseURL || API.BASE_URL,
     timeout: API.TIMEOUT,
-    ...headers,
+    ...config?.headers,
   });
 
   apiInvoker.interceptors.request.use(interceptRequest);

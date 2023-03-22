@@ -1,7 +1,7 @@
 import { AxiosInstance, AxiosRequestConfig } from "axios";
 
 export interface APIInvokerConfig {
-  baseUrl: string;
+  baseURL: string;
   headers: AxiosRequestConfig;
 }
 
