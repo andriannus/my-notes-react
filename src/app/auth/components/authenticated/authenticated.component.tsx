@@ -13,7 +13,7 @@ const Authenticated: FC<PropsWithChildren> = ({ children }) => {
       <Navigate
         replace
         to={{
-          pathname: "/notes",
+          pathname: "/login",
           search: createSearchParams({
             redirect: location.pathname,
           }).toString(),
