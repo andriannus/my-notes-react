@@ -4,8 +4,8 @@
   &-button {
     @apply px-xs py-2xs;
 
-    &:first-child {
-      @apply mr-xs;
+    &:not(:first-child) {
+      @apply ml-xs;
     }
   }
 }

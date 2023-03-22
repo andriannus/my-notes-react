@@ -6,5 +6,6 @@ export interface UserLoggedIn {
 
 export interface AuthContext {
   accessToken: string | null;
+  logout(): void;
   user: UserLoggedIn | null;
 }
