@@ -11,7 +11,7 @@ import {
 } from "@/components";
 import { useAuth } from "@/contexts";
 import { useAPIInvoker } from "@/hooks";
-import { Note, Response } from "@/models";
+import { Note, ResponseWithData } from "@/models";
 
 import { useNotes } from "../notes.hook";
 
@@ -23,7 +23,9 @@ const Home: FC = () => {
   const { data: notes = [], refetch } = useQuery(
     ["not-archived-notes"],
     async () => {
-      const { data: Data } = await apiInvoker.get<Response<Note[]>>("/notes");
+      const { data: Data } = await apiInvoker.get<ResponseWithData<Note[]>>(
+        "/notes"
+      );
       return Data.data;
     }
   );

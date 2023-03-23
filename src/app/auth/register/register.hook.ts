@@ -31,19 +31,14 @@ export function useRegister() {
       setIsLoading(true);
 
       try {
-        await apiInvoker.post<Omit<Response<undefined>, "data">>(
-          "/register",
-          data
-        );
+        await apiInvoker.post<Response>("/register", data);
 
         setIsLoading(false);
         navigate("/login");
       } catch (error) {
         setIsLoading(false);
 
-        const { response } = error as AxiosError<
-          Omit<Response<undefined>, "data">
-        >;
+        const { response } = error as AxiosError<Response>;
 
         if (response?.status === HTTP_STATUS_CODES.BAD_REQUEST) {
           ErrorToast("Email telah digunakan");

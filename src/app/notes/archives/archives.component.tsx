@@ -5,7 +5,7 @@ import { Helmet } from "react-helmet-async";
 import { AppBar, DeleteNoteDialog, Notes, SuccessToast } from "@/components";
 import { useAuth } from "@/contexts";
 import { useAPIInvoker } from "@/hooks";
-import { Note, Response } from "@/models";
+import { Note, ResponseWithData } from "@/models";
 
 import { useNotes } from "../notes.hook";
 
@@ -17,7 +17,7 @@ const Archives: FC = () => {
   const { data: notes = [], refetch } = useQuery(
     ["archived-notes"],
     async () => {
-      const { data: Data } = await apiInvoker.get<Response<Note[]>>(
+      const { data: Data } = await apiInvoker.get<ResponseWithData<Note[]>>(
         "/notes/archived"
       );
       return Data.data;

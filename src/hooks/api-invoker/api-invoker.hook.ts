@@ -1,17 +1,23 @@
 import axios, {
+  AxiosError,
   AxiosResponse,
   CancelTokenSource,
   InternalAxiosRequestConfig,
 } from "axios";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-import { API } from "@/constants";
+import { API, HTTP_STATUS_CODES, MYN_ACCESS_TOKEN } from "@/constants";
+import { useLocalStorage } from "@/hooks";
 
 import { APIInvokerConfig, APIInvokerHook } from "./api-invoker.model";
 
 export function useAPIInvoker(
   config?: Partial<APIInvokerConfig>
 ): APIInvokerHook {
+  const ls = useLocalStorage();
+  const navigate = useNavigate();
+
   const [cancelSource, setCancelSource] = useState<CancelTokenSource>();
 
   const apiInvoker = axios.create({
@@ -51,7 +57,12 @@ export function useAPIInvoker(
     return res;
   }
 
-  function interceptErrorResponse(err: any): Promise<never> {
+  function interceptErrorResponse(err: AxiosError): Promise<never> {
+    if (err.response?.status === HTTP_STATUS_CODES.UNAUTHORIZED) {
+      ls.remove(MYN_ACCESS_TOKEN);
+      navigate("/login");
+    }
+
     return Promise.reject(err);
   }
 

@@ -6,7 +6,7 @@ import { useParams } from "react-router-dom";
 import { AppBar } from "@/components";
 import { useAuth } from "@/contexts";
 import { useAPIInvoker } from "@/hooks";
-import { Note, Response } from "@/models";
+import { Note, ResponseWithData } from "@/models";
 import { transformToIDFormat } from "@/utils";
 
 const Detail: FC = () => {
@@ -17,7 +17,7 @@ const Detail: FC = () => {
   const { data: note, isLoading } = useQuery(
     ["note"],
     async () => {
-      const { data: Data } = await apiInvoker.get<Response<Note>>(
+      const { data: Data } = await apiInvoker.get<ResponseWithData<Note>>(
         `/notes/${id}`
       );
       return Data.data;

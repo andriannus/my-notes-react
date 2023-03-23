@@ -1,5 +1,8 @@
-export interface Response<T> {
+export interface Response {
   success: boolean;
   message: string;
-  data: T;
 }
+
+export type ResponseWithData<T> = Response & {
+  data: T;
+};
