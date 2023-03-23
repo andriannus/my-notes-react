@@ -9,8 +9,14 @@ import { AuthLayout } from "../components";
 import { useLogin } from "./login.hook";
 
 const Login: FC = () => {
-  const { formState, handleLoginFormSubmit, handleSubmit, register, values } =
-    useLogin();
+  const {
+    formState,
+    handleLoginFormSubmit,
+    handleSubmit,
+    isLoading,
+    register,
+    values,
+  } = useLogin();
 
   return (
     <>
@@ -61,11 +67,11 @@ const Login: FC = () => {
             <Button
               id="BtnClose"
               color="primary"
-              disabled={!formState.isValid}
+              disabled={!formState.isValid || isLoading}
               fullWidth
               type="submit"
             >
-              Masuk
+              {isLoading ? "Sedang memuat..." : "Masuk"}
             </Button>
           </AuthLayout.Footer>
         </AuthLayout>

@@ -25,14 +25,14 @@ export function useLogin() {
     return () => subscription.unsubscribe();
   }, [watch]);
 
-  const login = useCallback(
-    async (payload: LoginForm) => {
+  const handleLoginFormSubmit: SubmitHandler<LoginForm> = useCallback(
+    async (data) => {
       setIsLoading(true);
 
       try {
         const { data: Data } = await apiInvoker.post<LoginResponse>(
           "/login",
-          payload
+          data
         );
 
         setIsLoading(false);
@@ -41,28 +41,17 @@ export function useLogin() {
         const redirect = searchParams.get("redirect");
         navigate(redirect || "/notes", { replace: true });
       } catch (error) {
-        console.error(error);
+        setIsLoading(false);
       }
     },
     [apiInvoker, ls, navigate]
   );
 
-  const handleLoginFormSubmit: SubmitHandler<LoginForm> = useCallback(
-    async (data) => {
-      try {
-        await login(data);
-      } catch (error) {
-        //
-      }
-    },
-    [login]
-  );
   return {
     formState,
     handleLoginFormSubmit,
     handleSubmit,
     isLoading,
-    login,
     register,
     values,
   };
