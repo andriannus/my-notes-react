@@ -5,7 +5,9 @@ import "@fortawesome/fontawesome-svg-core/styles.css";
 import {
   faArchive,
   faArrowLeft,
+  faMoon,
   faSignOut,
+  faSun,
 } from "@fortawesome/free-solid-svg-icons";
 
 import { App } from "@/app";
@@ -13,7 +15,7 @@ import { App } from "@/app";
 import "./main.scss";
 
 config.autoAddCss = false;
-library.add(faArchive, faArrowLeft, faSignOut);
+library.add(faArchive, faArrowLeft, faMoon, faSignOut, faSun);
 
 const root = document.getElementById("root") as HTMLElement;
 

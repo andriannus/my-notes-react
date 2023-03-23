@@ -1,5 +1,6 @@
 .AppBar-backButton {
-  @apply flex h-md items-center justify-center outline-none rounded-full transition duration-300 w-md;
+  @apply dark:text-white flex h-md items-center justify-center;
+  @apply outline-none rounded-full transition duration-300 w-md;
 
   -webkit-tap-highlight-color: transparent;
 

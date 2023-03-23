@@ -1,6 +1,6 @@
 .AppBar {
-  @apply bg-white flex items-center justify-between;
-  @apply mb-md p-bs sticky top-0 w-full;
+  @apply bg-white dark:bg-black flex items-center justify-between;
+  @apply mb-md p-bs sticky top-0 transition duration-300 w-full;
 
   height: 56px;
 

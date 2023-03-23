@@ -12,10 +12,11 @@ const NotFound: FC = () => {
 
       <AppBar>
         <AppBar.BackButton href="/notes" replace />
+        <AppBar.Actions />
       </AppBar>
 
       <main className="Container">
-        <p className="text-center text-gray-500">
+        <p className="text-center text-gray-500 dark:text-white">
           Ups... halaman tidak ditemukan
         </p>
       </main>

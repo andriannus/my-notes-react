@@ -14,10 +14,7 @@ const AppRoutes: FC = () => {
       path: "*",
       element: <Navigate replace to="/404" />,
     },
-    {
-      path: "404",
-      element: <NotFound />,
-    },
+    
     {
       path: "/",
       element: <DefaultLayout />,
@@ -25,6 +22,10 @@ const AppRoutes: FC = () => {
         {
           index: true,
           element: <Navigate replace to="/notes" />,
+        },
+        {
+          path: "404",
+          element: <NotFound />,
         },
         ...authRoutes,
         ...noteRoutes,

@@ -26,6 +26,7 @@ const Register: FC = () => {
 
       <AppBar>
         <AppBar.Title>Daftar</AppBar.Title>
+        <AppBar.Actions />
       </AppBar>
 
       <form onSubmit={handleSubmit(handleRegisterFormSubmit)}>
@@ -66,7 +67,7 @@ const Register: FC = () => {
               {...register("password", { minLength: 8, required: true })}
             />
 
-            <span className="text-xs">
+            <span className="text-xs dark:text-white">
               Sudah punya akun?{" "}
               <Link className="Link" to="/login">
                 Masuk

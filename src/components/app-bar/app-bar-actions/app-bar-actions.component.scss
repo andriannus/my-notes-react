@@ -2,7 +2,7 @@
   @apply flex justify-end;
 
   &-button {
-    @apply px-xs py-2xs;
+    @apply dark:text-white px-xs py-2xs w-8;
 
     &:not(:first-child) {
       @apply ml-xs;

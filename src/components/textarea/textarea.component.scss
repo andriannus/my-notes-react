@@ -1,13 +1,15 @@
 .TextArea {
   &-input {
-    @apply align-top appearance-none border rounded-xs px-xs py-sm text-base;
-    @apply leading-5 text-gray-900 transition duration-200 w-full;
+    @apply align-top appearance-none dark:bg-gray-800 border dark:border-white;
+    @apply rounded-xs px-xs py-sm text-base leading-5 text-gray-900;
+    @apply dark:text-white transition duration-200 w-full;
 
     border-color: #e0e0e0;
     min-height: 46px;
 
     &:focus {
-      @apply border-red-400 outline-none ring ring-red-200;
+      @apply border-red-400 dark:border-gray-300 outline-none;
+      @apply ring ring-red-200 dark:ring-gray-100;
     }
 
     &::placeholder {

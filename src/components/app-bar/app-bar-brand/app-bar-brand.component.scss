@@ -1,3 +1,4 @@
 .AppBar-brand {
-  @apply cursor-default font-extrabold text-xl leading-6 select-none;
+  @apply cursor-default dark:text-white font-extrabold;
+  @apply text-xl leading-6 select-none;
 }

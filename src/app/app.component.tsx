@@ -3,7 +3,7 @@ import { FC, Suspense } from "react";
 import { HelmetProvider } from "react-helmet-async";
 import { BrowserRouter as Router } from "react-router-dom";
 
-import { AuthProvider } from "@/contexts";
+import { AuthProvider, ThemeProvider } from "@/contexts";
 
 import AppRoutes from "./app.routes";
 
@@ -15,18 +15,20 @@ const queryClient = new QueryClient({
   },
 });
 
-const App: FC<Record<string, unknown>> = () => {
+const App: FC = () => {
   return (
     <QueryClientProvider client={queryClient}>
-      <Router>
-        <Suspense>
-          <HelmetProvider>
-            <AuthProvider>
-              <AppRoutes />
-            </AuthProvider>
-          </HelmetProvider>
-        </Suspense>
-      </Router>
+      <ThemeProvider>
+        <Router>
+          <Suspense>
+            <HelmetProvider>
+              <AuthProvider>
+                <AppRoutes />
+              </AuthProvider>
+            </HelmetProvider>
+          </Suspense>
+        </Router>
+      </ThemeProvider>
     </QueryClientProvider>
   );
 };

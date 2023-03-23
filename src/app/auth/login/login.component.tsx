@@ -26,6 +26,7 @@ const Login: FC = () => {
 
       <AppBar>
         <AppBar.Title>Masuk</AppBar.Title>
+        <AppBar.Actions />
       </AppBar>
 
       <form onSubmit={handleSubmit(handleLoginFormSubmit)}>
@@ -55,7 +56,7 @@ const Login: FC = () => {
               {...register("password", { required: true })}
             />
 
-            <span className="text-xs">
+            <span className="text-xs dark:text-white">
               Belum punya akun?{" "}
               <Link className="Link" to="/register">
                 Daftar
