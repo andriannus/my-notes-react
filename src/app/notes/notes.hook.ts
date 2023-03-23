@@ -1,8 +1,8 @@
 import { useCallback } from "react";
 
-import { Note, useAuth } from "@/contexts";
+import { useAuth } from "@/contexts";
 import { useAPIInvoker } from "@/hooks";
-import { Response } from "@/models";
+import { Note, Response } from "@/models";
 
 export function useNotes() {
   const { authHeaders } = useAuth();

@@ -3,9 +3,9 @@ import { FC, useCallback } from "react";
 import { Helmet } from "react-helmet-async";
 
 import { AppBar, DeleteNoteDialog, Notes, SuccessToast } from "@/components";
-import { Note, useAuth } from "@/contexts";
+import { useAuth } from "@/contexts";
 import { useAPIInvoker } from "@/hooks";
-import { Response } from "@/models";
+import { Note, Response } from "@/models";
 
 import { useNotes } from "../notes.hook";
 

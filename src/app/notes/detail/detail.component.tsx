@@ -1,46 +1,67 @@
+import { useQuery } from "@tanstack/react-query";
 import { FC, useMemo } from "react";
 import { Helmet } from "react-helmet-async";
-import { Navigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 import { AppBar } from "@/components";
-import { useNote } from "@/contexts";
+import { useAuth } from "@/contexts";
+import { useAPIInvoker } from "@/hooks";
+import { Note, Response } from "@/models";
 import { transformToIDFormat } from "@/utils";
 
 const Detail: FC = () => {
   const { id } = useParams();
-  const { getNote } = useNote();
+  const { authHeaders } = useAuth();
+  const { apiInvoker } = useAPIInvoker({ headers: authHeaders });
 
-  const selectedNote = useMemo(() => {
-    return getNote(id);
-  }, [id]);
+  const { data: note, isLoading } = useQuery(
+    ["note"],
+    async () => {
+      const { data: Data } = await apiInvoker.get<Response<Note>>(
+        `/notes/${id}`
+      );
+      return Data.data;
+    },
+    { enabled: !!id }
+  );
 
   const formattedCratedAt = useMemo(() => {
-    if (!selectedNote?.createdAt) return "";
-    return transformToIDFormat(new Date(selectedNote.createdAt));
-  }, [selectedNote?.createdAt]);
-
-  if (!selectedNote?.id) {
-    return <Navigate replace to="/404" />;
-  }
+    if (!note?.createdAt) return "";
+    return transformToIDFormat(new Date(note.createdAt));
+  }, [note?.createdAt]);
 
   return (
     <>
       <Helmet>
-        <title>{`${selectedNote?.title} - myNotes`}</title>
+        <title>{`${note?.title || "Catatan tidak ditemukan"} - myNotes`}</title>
       </Helmet>
 
       <AppBar>
         <AppBar.BackButton />
-        <AppBar.Title>{selectedNote?.title}</AppBar.Title>
+        <AppBar.Title>{note?.title}</AppBar.Title>
       </AppBar>
 
       <main className="Container">
-        <div className="Note is-readOnly">
-          <div className="Note-content">
-            <p>{selectedNote.body}</p>
-            <span className="Note-createdAt">Dibuat: {formattedCratedAt}</span>
+        {isLoading && (
+          <p className="text-center text-gray-500">Memuat data...</p>
+        )}
+
+        {!isLoading && !note && (
+          <p className="text-center text-gray-500">
+            Ups... catatan tidak ditemukan
+          </p>
+        )}
+
+        {!isLoading && note && (
+          <div className="Note is-readOnly">
+            <div className="Note-content">
+              <p>{note.body}</p>
+              <span className="Note-createdAt">
+                Dibuat: {formattedCratedAt}
+              </span>
+            </div>
           </div>
-        </div>
+        )}
       </main>
     </>
   );

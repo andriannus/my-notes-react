@@ -10,12 +10,12 @@ import {
 } from "react";
 
 import { Button, SuccessToast, TextArea, TextField } from "@/components";
-import { INote } from "@/contexts";
+import { Note } from "@/contexts";
 
 import "./create-note.component.scss";
 
 interface CreateNoteProps {
-  onClose(note: Pick<INote, "body" | "title">): void;
+  onClose(note: Pick<Note, "body" | "title">): void;
 }
 
 const CreateNote: FC<CreateNoteProps> = ({ onClose = () => {} }) => {

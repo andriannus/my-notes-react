@@ -3,8 +3,9 @@ import { FC, Suspense } from "react";
 import { HelmetProvider } from "react-helmet-async";
 import { BrowserRouter as Router } from "react-router-dom";
 
-import AppRoutes from "@/app/app.routes";
-import { AuthProvider, NoteProvider } from "@/contexts";
+import { AuthProvider } from "@/contexts";
+
+import AppRoutes from "./app.routes";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -21,9 +22,7 @@ const App: FC<Record<string, unknown>> = () => {
         <Suspense>
           <HelmetProvider>
             <AuthProvider>
-              <NoteProvider>
-                <AppRoutes />
-              </NoteProvider>
+              <AppRoutes />
             </AuthProvider>
           </HelmetProvider>
         </Suspense>

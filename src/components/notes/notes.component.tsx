@@ -3,12 +3,12 @@ import { FC, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { Masonry } from "@/components";
-import { INote } from "@/contexts";
+import { Note } from "@/contexts";
 import { truncate } from "@/utils";
 
 interface NotesProps {
   emptyText: string;
-  notes: INote[];
+  notes: Note[];
   onArchive(id: string): void;
   onDelete(id: string): void;
   onUnarchive(id: string): void;
