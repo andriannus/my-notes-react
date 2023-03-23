@@ -12,10 +12,19 @@ const Toast = Swal.mixin({
 });
 
 export function SuccessToast(
-  message: string,
+  message: string
 ): Promise<SweetAlertResult<unknown>> {
   return Toast.fire({
     icon: "success",
+    title: message,
+  });
+}
+
+export function ErrorToast(
+  message: string
+): Promise<SweetAlertResult<unknown>> {
+  return Toast.fire({
+    icon: "error",
     title: message,
   });
 }

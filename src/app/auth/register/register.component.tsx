@@ -9,7 +9,14 @@ import { AuthLayout } from "../components";
 import { useRegister } from "./register.hook";
 
 const Register: FC = () => {
-  const { formState, register, values } = useRegister();
+  const {
+    formState,
+    handleRegisterFormSubmit,
+    handleSubmit,
+    isLoading,
+    register,
+    values,
+  } = useRegister();
 
   return (
     <>
@@ -21,7 +28,7 @@ const Register: FC = () => {
         <AppBar.Title>Daftar</AppBar.Title>
       </AppBar>
 
-      <form>
+      <form onSubmit={handleSubmit(handleRegisterFormSubmit)}>
         <AuthLayout>
           <AuthLayout.Body>
             <TextField
@@ -71,11 +78,11 @@ const Register: FC = () => {
             <Button
               id="BtnClose"
               color="primary"
-              disabled={!formState.isValid}
+              disabled={!formState.isValid || isLoading}
               fullWidth
               type="submit"
             >
-              Daftar
+              {isLoading ? "Sedang memuat..." : "Daftar"}
             </Button>
           </AuthLayout.Footer>
         </AuthLayout>
