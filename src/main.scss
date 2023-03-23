@@ -6,6 +6,10 @@
   @apply bg-gray-100 dark:bg-gray-800;
 }
 
+.Caption {
+  @apply text-center text-gray-500 dark:text-white;
+}
+
 .Container {
   @media screen and (max-width: theme("screens.md")) {
     @apply mb-bs mx-bs;

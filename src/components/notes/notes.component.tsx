@@ -3,19 +3,13 @@ import { FC, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { Masonry } from "@/components";
-import { Note } from "@/models";
 import { truncate } from "@/utils";
 
-interface NotesProps {
-  emptyText: string;
-  notes: Note[];
-  onArchive(id: string): void;
-  onDelete(id: string): void;
-  onUnarchive(id: string): void;
-}
+import { NotesProps } from "./notes.model";
 
 const Notes: FC<Partial<NotesProps>> = ({
   emptyText = "",
+  isLoading = false,
   notes = [],
   onArchive = () => null,
   onDelete = () => null,
@@ -29,8 +23,10 @@ const Notes: FC<Partial<NotesProps>> = ({
 
   return (
     <>
-      {notes.length < 1 ? (
-        <p className="text-center text-gray-500">{emptyText}</p>
+      {isLoading ? (
+        <p className="Caption">Sedang memuat...</p>
+      ) : notes.length < 1 ? (
+        <p className="Caption">{emptyText}</p>
       ) : (
         <Masonry>
           {notes.map((note) => {

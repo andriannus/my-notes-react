@@ -20,15 +20,16 @@ const Home: FC = () => {
   const { archiveNote, createNote, deleteNote } = useNotes();
   const { apiInvoker } = useAPIInvoker({ headers: authHeaders });
 
-  const { data: notes = [], refetch } = useQuery(
-    ["not-archived-notes"],
-    async () => {
-      const { data: Data } = await apiInvoker.get<ResponseWithData<Note[]>>(
-        "/notes"
-      );
-      return Data.data;
-    }
-  );
+  const {
+    data: notes = [],
+    isLoading,
+    refetch,
+  } = useQuery(["not-archived-notes"], async () => {
+    const { data: Data } = await apiInvoker.get<ResponseWithData<Note[]>>(
+      "/notes"
+    );
+    return Data.data;
+  });
 
   const handleNoteCreate = useCallback(
     async (note: Pick<Note, "body" | "title">) => {
@@ -76,6 +77,7 @@ const Home: FC = () => {
 
         <Notes
           emptyText="Kamu belum membuat catatan. Yuk, buat sekarang."
+          isLoading={isLoading}
           notes={notes}
           onArchive={handleNoteArchive}
           onDelete={handleNoteDelete}

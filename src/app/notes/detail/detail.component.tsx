@@ -42,17 +42,11 @@ const Detail: FC = () => {
       </AppBar>
 
       <main className="Container">
-        {isLoading && (
-          <p className="text-center text-gray-500">Memuat data...</p>
-        )}
-
-        {!isLoading && !note && (
-          <p className="text-center text-gray-500">
-            Ups... catatan tidak ditemukan
-          </p>
-        )}
-
-        {!isLoading && note && (
+        {isLoading ? (
+          <p className="Caption">Sedang memuat...</p>
+        ) : !note ? (
+          <p className="Caption">Ups... catatan tidak ditemukan</p>
+        ) : (
           <div className="Note is-readOnly">
             <div className="Note-content">
               <p>{note.body}</p>

@@ -4,6 +4,8 @@
   &-button {
     @apply dark:text-white px-xs py-2xs w-8;
 
+    -webkit-tap-highlight-color: transparent;
+
     &:not(:first-child) {
       @apply ml-xs;
     }

@@ -16,7 +16,7 @@ const NotFound: FC = () => {
       </AppBar>
 
       <main className="Container">
-        <p className="text-center text-gray-500 dark:text-white">
+        <p className="Caption">
           Ups... halaman tidak ditemukan
         </p>
       </main>

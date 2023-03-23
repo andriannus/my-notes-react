@@ -14,15 +14,16 @@ const Archives: FC = () => {
   const { deleteNote, unarchiveNote } = useNotes();
   const { apiInvoker } = useAPIInvoker({ headers: authHeaders });
 
-  const { data: notes = [], refetch } = useQuery(
-    ["archived-notes"],
-    async () => {
-      const { data: Data } = await apiInvoker.get<ResponseWithData<Note[]>>(
-        "/notes/archived"
-      );
-      return Data.data;
-    }
-  );
+  const {
+    data: notes = [],
+    isLoading,
+    refetch,
+  } = useQuery(["archived-notes"], async () => {
+    const { data: Data } = await apiInvoker.get<ResponseWithData<Note[]>>(
+      "/notes/archived"
+    );
+    return Data.data;
+  });
 
   const handleNoteUnarchive = useCallback(
     async (noteID: string) => {
@@ -60,6 +61,7 @@ const Archives: FC = () => {
       <main className="Container">
         <Notes
           emptyText="Catatan yang kamu arsipkan muncul di sini."
+          isLoading={isLoading}
           notes={notes}
           onDelete={handleNoteDelete}
           onUnarchive={handleNoteUnarchive}
