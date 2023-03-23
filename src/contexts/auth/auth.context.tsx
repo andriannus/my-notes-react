@@ -12,9 +12,9 @@ import { useNavigate } from "react-router-dom";
 import { MYN_ACCESS_TOKEN, MYN_USER } from "@/constants";
 import { useLocalStorage } from "@/hooks";
 
-import { AuthContext, UserLoggedIn } from "./auth.model";
+import { AuthContextProps, UserLoggedIn } from "./auth.model";
 
-const AuthContext = createContext<AuthContext>({
+const AuthContext = createContext<AuthContextProps>({
   accessToken: null,
   authHeaders: {},
   logout: () => null,

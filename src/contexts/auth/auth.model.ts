@@ -6,7 +6,7 @@ export interface UserLoggedIn {
   name: string;
 }
 
-export interface AuthContext {
+export interface AuthContextProps {
   accessToken: string | null;
   authHeaders: AxiosRequestConfig;
   logout(): void;
