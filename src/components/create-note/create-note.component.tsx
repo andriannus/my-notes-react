@@ -10,7 +10,7 @@ import {
 } from "react";
 
 import { Button, SuccessToast, TextArea, TextField } from "@/components";
-import { Note } from "@/contexts";
+import { Note } from "@/models";
 
 import "./create-note.component.scss";
 
@@ -18,7 +18,7 @@ interface CreateNoteProps {
   onClose(note: Pick<Note, "body" | "title">): void;
 }
 
-const CreateNote: FC<CreateNoteProps> = ({ onClose = () => {} }) => {
+const CreateNote: FC<CreateNoteProps> = ({ onClose = () => null }) => {
   const [isFormShown, setFormStatus] = useState(false);
 
   const [note, setNote] = useState({

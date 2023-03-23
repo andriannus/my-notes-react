@@ -3,7 +3,7 @@ import { FC, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { Masonry } from "@/components";
-import { Note } from "@/contexts";
+import { Note } from "@/models";
 import { truncate } from "@/utils";
 
 interface NotesProps {

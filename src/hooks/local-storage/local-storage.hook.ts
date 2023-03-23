@@ -10,7 +10,7 @@ export function useLocalStorage(): LocalStorageHook {
     return JSON.parse(data);
   }
 
-  function set(key: string, value: string): void {
+  function set(key: string, value: any): void {
     const data = JSON.stringify(value);
     localStorage.setItem(key, data);
   }
