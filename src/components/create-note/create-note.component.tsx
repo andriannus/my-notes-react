@@ -8,6 +8,7 @@ import {
   useMemo,
   useState,
 } from "react";
+import { useTranslation } from "react-i18next";
 
 import { Button, SuccessToast, TextArea, TextField } from "@/components";
 import { Note } from "@/models";
@@ -19,6 +20,10 @@ interface CreateNoteProps {
 }
 
 const CreateNote: FC<CreateNoteProps> = ({ onClose = () => null }) => {
+  const { t } = useTranslation("translation", {
+    keyPrefix: "components.create_note",
+  });
+
   const [isFormShown, setFormStatus] = useState(false);
 
   const [note, setNote] = useState({
@@ -74,7 +79,7 @@ const CreateNote: FC<CreateNoteProps> = ({ onClose = () => null }) => {
           className="CreateNote-onBoard"
           onClick={() => setFormStatus(!isFormShown)}
         >
-          <span>Buat catatan...</span>
+          <span>{t("on_board")}</span>
         </div>
       )}
 
@@ -85,7 +90,7 @@ const CreateNote: FC<CreateNoteProps> = ({ onClose = () => null }) => {
             value={note.title}
             className="mb-sm"
             counter={50}
-            placeholder="Judul"
+            placeholder={t<string>("form.title")}
             onChange={handleTitleChange}
           />
 
@@ -93,13 +98,13 @@ const CreateNote: FC<CreateNoteProps> = ({ onClose = () => null }) => {
             id="TxtBody"
             value={note.body}
             className="mb-bs"
-            placeholder="Buat catatan..."
+            placeholder={t<string>("form.body")}
             onChange={handleBodyChange}
           />
 
           <div className="text-right">
             <Button id="BtnClose" type="button" onClick={handleButtonClick}>
-              Tutup
+              {t("form.button")}
             </Button>
           </div>
         </div>

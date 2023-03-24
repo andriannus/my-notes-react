@@ -1,0 +1,98 @@
+{
+  "translation": {
+    "app": {
+      "auth": {
+        "login": {
+          "title": "Masuk",
+          "caption": {
+            "text": "Belum punya akun?",
+            "link": "Daftar"
+          },
+          "form": {
+            "email": "Email",
+            "password": "Kata sandi",
+            "button": {
+              "loading": "Sedang memuat...",
+              "text": "Masuk"
+            }
+          }
+        },
+        "register": {
+          "title": "Daftar",
+          "caption": {
+            "text": "Sudah punya akun?",
+            "link": "Masuk"
+          },
+          "form": {
+            "name": "Nama",
+            "email": "Email",
+            "password": "Kata sandi",
+            "button": {
+              "loading": "Sedang memuat...",
+              "text": "Daftar"
+            }
+          },
+          "toast": {
+            "error": "Email telah digunakan"
+          }
+        }
+      },
+      "notes": {
+        "archives": {
+          "page": {
+            "title": "Catatan yang diarsipkan - myNotes"
+          },
+          "app_bar": {
+            "title": "Arsip"
+          },
+          "notes": {
+            "empty_text": "Catatan yang kamu arsipkan muncul di sini."
+          },
+          "toast": {
+            "unarchive": "Catatan berhasil dipindah",
+            "delete": "Catatan berhasil dihapus"
+          }
+        },
+        "detail": {
+          "page": {
+            "title": "Catatan tidak ditemukan"
+          },
+          "content": {
+            "loading": "Sedang memuat...",
+            "created_at": "Dibuat:"
+          }
+        },
+        "home": {
+          "page": {
+            "title": "Catat apapun yang kamu inginkan! - myNotes"
+          },
+          "notes": {
+            "empty_text": "Kamu belum membuat catatan. Yuk, buat sekarang."
+          },
+          "toast": {
+            "archive": "Catatan berhasil diarsip",
+            "delete": "Catatan berhasil dihapus"
+          }
+        }
+      }
+    },
+    "components": {
+      "create_note": {
+        "on_board": "Buat catatan...",
+        "form": {
+          "title": "Judul",
+          "body": "Buat catatan...",
+          "button": "Tutup"
+        }
+      },
+      "notes": {
+        "button": {
+          "archive": "Arsipkan",
+          "unarchive": "Batal arsip",
+          "delete": "Hapus"
+        },
+        "loading": "Sedang memuat..."
+      }
+    }
+  }
+}

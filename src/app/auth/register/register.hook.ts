@@ -1,6 +1,7 @@
 import { AxiosError } from "axios";
 import { useCallback, useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
 import { ErrorToast } from "@/components";
@@ -13,6 +14,8 @@ import { RegisterForm } from "./register.model";
 export function useRegister() {
   const { apiInvoker } = useAPIInvoker();
   const navigate = useNavigate();
+
+  const { t } = useTranslation("translation", { keyPrefix: "app.register" });
 
   const { formState, handleSubmit, register, watch } = useForm<RegisterForm>({
     mode: "onChange",
@@ -41,7 +44,7 @@ export function useRegister() {
         const { response } = error as AxiosError<Response>;
 
         if (response?.status === HTTP_STATUS_CODES.BAD_REQUEST) {
-          ErrorToast("Email telah digunakan");
+          ErrorToast(t("toast.error"));
         }
       }
     },

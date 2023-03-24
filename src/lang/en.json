@@ -1,0 +1,98 @@
+{
+  "translation": {
+    "app": {
+      "auth": {
+        "login": {
+          "title": "Login",
+          "caption": {
+            "text": "Don't have an account?",
+            "link": "Register"
+          },
+          "form": {
+            "email": "Email",
+            "password": "Password",
+            "button": {
+              "loading": "Loading...",
+              "text": "Login"
+            }
+          }
+        },
+        "register": {
+          "title": "Register",
+          "caption": {
+            "text": "Already have an account?",
+            "link": "Login"
+          },
+          "form": {
+            "name": "Name",
+            "email": "Email",
+            "password": "Password",
+            "button": {
+              "loading": "Loading...",
+              "text": "Register"
+            }
+          },
+          "toast": {
+            "error": "An email has been used"
+          }
+        }
+      },
+      "notes": {
+        "archives": {
+          "page": {
+            "title": "Archived notes - myNotes"
+          },
+          "app_bar": {
+            "title": "Archives"
+          },
+          "notes": {
+            "empty_text": "Notes that you archive appear here."
+          },
+          "toast": {
+            "unarchive": "Note moved successfully",
+            "delete": "Note deleted successfully"
+          }
+        },
+        "detail": {
+          "page": {
+            "title": "Note not found"
+          },
+          "content": {
+            "loading": "Loading...",
+            "created_at": "Created at:"
+          }
+        },
+        "home": {
+          "page": {
+            "title": "Write down anything you want! - myNotes"
+          },
+          "notes": {
+            "empty_text": "You haven't made a note yet. Come on, do it now."
+          },
+          "toast": {
+            "archive": "Note archived successfully",
+            "delete": "Note deleted successfully"
+          }
+        }
+      }
+    },
+    "components": {
+      "create_note": {
+        "on_board": "Create note...",
+        "form": {
+          "title": "Title",
+          "body": "Create note...",
+          "button": "Close"
+        }
+      },
+      "notes": {
+        "button": {
+          "archive": "Archive",
+          "unarchive": "Unarchive",
+          "delete": "Delete"
+        },
+        "loading": "Loading..."
+      }
+    }
+  }
+}

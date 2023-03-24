@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { FC, useCallback } from "react";
 import { Helmet } from "react-helmet-async";
+import { useTranslation } from "react-i18next";
 
 import {
   AppBar,
@@ -17,12 +18,14 @@ import { useNotes } from "../notes.hook";
 
 const Home: FC = () => {
   const { authHeaders } = useAuth();
-  const { archiveNote, createNote, deleteNote } = useNotes();
+  const { archiveNote, createNote, deleteNote, loading } = useNotes();
   const { apiInvoker } = useAPIInvoker({ headers: authHeaders });
+
+  const { t } = useTranslation("translation", { keyPrefix: "app.notes.home" });
 
   const {
     data: notes = [],
-    isLoading,
+    isFetching,
     refetch,
   } = useQuery(["not-archived-notes"], async () => {
     const { data: Data } = await apiInvoker.get<ResponseWithData<Note[]>>(
@@ -43,7 +46,7 @@ const Home: FC = () => {
     async (noteID: string) => {
       await archiveNote(noteID);
       await refetch();
-      SuccessToast("Catatan berhasil diarsip");
+      SuccessToast(t("toast.archive"));
     },
     [archiveNote]
   );
@@ -55,7 +58,7 @@ const Home: FC = () => {
       if (result.isConfirmed) {
         await deleteNote(noteID);
         await refetch();
-        SuccessToast("Catatan berhasil dihapus");
+        SuccessToast(t("toast.delete"));
       }
     },
     [deleteNote]
@@ -64,7 +67,7 @@ const Home: FC = () => {
   return (
     <>
       <Helmet>
-        <title>Catat apapun yang kamu inginkan! - myNotes</title>
+        <title>{t("page.title")}</title>
       </Helmet>
 
       <AppBar>
@@ -76,8 +79,9 @@ const Home: FC = () => {
         <CreateNote onClose={handleNoteCreate} />
 
         <Notes
-          emptyText="Kamu belum membuat catatan. Yuk, buat sekarang."
-          isLoading={isLoading}
+          emptyText={t<string>("notes.empty_text")}
+          isFetching={isFetching}
+          isLoading={loading.isArchive || loading.isDelete}
           notes={notes}
           onArchive={handleNoteArchive}
           onDelete={handleNoteDelete}

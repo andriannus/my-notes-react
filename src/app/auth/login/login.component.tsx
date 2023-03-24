@@ -1,5 +1,6 @@
 import { FC } from "react";
 import { Helmet } from "react-helmet-async";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
 import { AppBar, Button, TextField } from "@/components";
@@ -9,6 +10,8 @@ import { AuthLayout } from "../components";
 import { useLogin } from "./login.hook";
 
 const Login: FC = () => {
+  const { t } = useTranslation("translation", { keyPrefix: "app.auth.login" });
+
   const {
     formState,
     handleLoginFormSubmit,
@@ -21,11 +24,11 @@ const Login: FC = () => {
   return (
     <>
       <Helmet>
-        <title>Masuk - myNotes</title>
+        <title>{t("title")} - myNotes</title>
       </Helmet>
 
       <AppBar>
-        <AppBar.Title>Masuk</AppBar.Title>
+        <AppBar.Title>{t("title")}</AppBar.Title>
         <AppBar.Actions />
       </AppBar>
 
@@ -37,7 +40,7 @@ const Login: FC = () => {
               autoCapitalize="off"
               autoComplete="email"
               className="mb-bs"
-              placeholder="Email"
+              placeholder={t<string>("form.email")}
               value={values.email}
               {...register("email", {
                 pattern: /\S+@\S+\.\S+/,
@@ -50,16 +53,16 @@ const Login: FC = () => {
               autoCapitalize="off"
               autoComplete="current-password"
               className="mb-sm"
-              placeholder="Password"
+              placeholder={t<string>("form.password")}
               type="password"
               value={values.password}
               {...register("password", { required: true })}
             />
 
             <span className="text-xs dark:text-white">
-              Belum punya akun?{" "}
+              {t("caption.text")}&nbsp;
               <Link className="Link" to="/register">
-                Daftar
+                {t("caption.link")}
               </Link>
             </span>
           </AuthLayout.Body>
@@ -72,7 +75,7 @@ const Login: FC = () => {
               fullWidth
               type="submit"
             >
-              {isLoading ? "Sedang memuat..." : "Masuk"}
+              {isLoading ? t("form.button.loading") : t("form.button.text")}
             </Button>
           </AuthLayout.Footer>
         </AuthLayout>

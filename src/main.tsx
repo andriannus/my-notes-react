@@ -12,6 +12,7 @@ import {
 
 import { App } from "@/app";
 
+import "./i18n";
 import "./main.scss";
 
 config.autoAddCss = false;

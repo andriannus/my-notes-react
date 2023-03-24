@@ -1,5 +1,6 @@
 import { FC } from "react";
 import { Helmet } from "react-helmet-async";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
 import { AppBar, Button, TextField } from "@/components";
@@ -9,6 +10,10 @@ import { AuthLayout } from "../components";
 import { useRegister } from "./register.hook";
 
 const Register: FC = () => {
+  const { t } = useTranslation("translation", {
+    keyPrefix: "app.auth.register",
+  });
+
   const {
     formState,
     handleRegisterFormSubmit,
@@ -21,11 +26,11 @@ const Register: FC = () => {
   return (
     <>
       <Helmet>
-        <title>Daftar - myNotes</title>
+        <title>{t("title")} - myNotes</title>
       </Helmet>
 
       <AppBar>
-        <AppBar.Title>Daftar</AppBar.Title>
+        <AppBar.Title>{t("title")}</AppBar.Title>
         <AppBar.Actions />
       </AppBar>
 
@@ -37,7 +42,7 @@ const Register: FC = () => {
               autoCapitalize="off"
               autoComplete="name"
               className="mb-bs"
-              placeholder="Nama"
+              placeholder={t<string>("form.name")}
               value={values.name}
               {...register("name", { required: true })}
             />
@@ -47,7 +52,7 @@ const Register: FC = () => {
               autoCapitalize="off"
               autoComplete="email"
               className="mb-bs"
-              placeholder="Email"
+              placeholder={t<string>("form.email")}
               type="email"
               value={values.email}
               {...register("email", {
@@ -61,16 +66,16 @@ const Register: FC = () => {
               autoCapitalize="off"
               autoComplete="new-password"
               className="mb-sm"
-              placeholder="Password"
+              placeholder={t<string>("form.password")}
               type="password"
               value={values.password}
               {...register("password", { minLength: 8, required: true })}
             />
 
             <span className="text-xs dark:text-white">
-              Sudah punya akun?{" "}
+              {t("caption.text")}&nbsp;
               <Link className="Link" to="/login">
-                Masuk
+                {t("caption.link")}
               </Link>
             </span>
           </AuthLayout.Body>
@@ -83,7 +88,7 @@ const Register: FC = () => {
               fullWidth
               type="submit"
             >
-              {isLoading ? "Sedang memuat..." : "Daftar"}
+              {isLoading ? t("form.button.loading") : t("form.button.text")}
             </Button>
           </AuthLayout.Footer>
         </AuthLayout>

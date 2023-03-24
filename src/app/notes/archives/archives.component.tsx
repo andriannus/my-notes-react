@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { FC, useCallback } from "react";
 import { Helmet } from "react-helmet-async";
+import { useTranslation } from "react-i18next";
 
 import { AppBar, DeleteNoteDialog, Notes, SuccessToast } from "@/components";
 import { useAuth } from "@/contexts";
@@ -11,12 +12,16 @@ import { useNotes } from "../notes.hook";
 
 const Archives: FC = () => {
   const { authHeaders } = useAuth();
-  const { deleteNote, unarchiveNote } = useNotes();
+  const { deleteNote, loading, unarchiveNote } = useNotes();
   const { apiInvoker } = useAPIInvoker({ headers: authHeaders });
+
+  const { t } = useTranslation("translation", {
+    keyPrefix: "app.notes.archives",
+  });
 
   const {
     data: notes = [],
-    isLoading,
+    isFetching,
     refetch,
   } = useQuery(["archived-notes"], async () => {
     const { data: Data } = await apiInvoker.get<ResponseWithData<Note[]>>(
@@ -29,7 +34,7 @@ const Archives: FC = () => {
     async (noteID: string) => {
       await unarchiveNote(noteID);
       await refetch();
-      SuccessToast("Catatan berhasil dipindah");
+      SuccessToast(t("toast.unarchive"));
     },
     [unarchiveNote]
   );
@@ -41,7 +46,7 @@ const Archives: FC = () => {
       if (result.isConfirmed) {
         await deleteNote(noteID);
         await refetch();
-        SuccessToast("Catatan berhasil dihapus");
+        SuccessToast(t("toast.delete"));
       }
     },
     [deleteNote]
@@ -50,18 +55,19 @@ const Archives: FC = () => {
   return (
     <>
       <Helmet>
-        <title>Catatan yang diarsipkan - myNotes</title>
+        <title>{t("page.title")}</title>
       </Helmet>
 
       <AppBar>
         <AppBar.BackButton href="/notes" />
-        <AppBar.Title>Arsip</AppBar.Title>
+        <AppBar.Title>{t("app_bar.title")}</AppBar.Title>
       </AppBar>
 
       <main className="Container">
         <Notes
-          emptyText="Catatan yang kamu arsipkan muncul di sini."
-          isLoading={isLoading}
+          emptyText={t<string>("notes.empty_text")}
+          isFetching={isFetching}
+          isLoading={loading.isUnarchive || loading.isDelete}
           notes={notes}
           onDelete={handleNoteDelete}
           onUnarchive={handleNoteUnarchive}

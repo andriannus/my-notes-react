@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { FC, useMemo } from "react";
 import { Helmet } from "react-helmet-async";
+import { useTranslation } from "react-i18next";
 import { useParams } from "react-router-dom";
 
 import { AppBar } from "@/components";
@@ -13,6 +14,10 @@ const Detail: FC = () => {
   const { id } = useParams();
   const { authHeaders } = useAuth();
   const { apiInvoker } = useAPIInvoker({ headers: authHeaders });
+
+  const { t } = useTranslation("translation", {
+    keyPrefix: "app.notes.detail",
+  });
 
   const { data: note, isLoading } = useQuery(
     ["note"],
@@ -33,7 +38,7 @@ const Detail: FC = () => {
   return (
     <>
       <Helmet>
-        <title>{`${note?.title || "Catatan tidak ditemukan"} - myNotes`}</title>
+        <title>{`${note?.title || t("page.title")} - myNotes`}</title>
       </Helmet>
 
       <AppBar>
@@ -43,15 +48,14 @@ const Detail: FC = () => {
 
       <main className="Container">
         {isLoading ? (
-          <p className="Caption">Sedang memuat...</p>
-        ) : !note ? (
-          <p className="Caption">Ups... catatan tidak ditemukan</p>
+          <p className="Caption">{t("content.loading")}</p>
         ) : (
           <div className="Note is-readOnly">
             <div className="Note-content">
-              <p>{note.body}</p>
+              <p>{note?.body}</p>
+
               <span className="Note-createdAt">
-                Dibuat: {formattedCratedAt}
+                {t("content.created_at")} {formattedCratedAt}
               </span>
             </div>
           </div>

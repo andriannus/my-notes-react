@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import { FC, useCallback } from "react";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
 import { Masonry } from "@/components";
@@ -9,22 +10,26 @@ import { NotesProps } from "./notes.model";
 
 const Notes: FC<Partial<NotesProps>> = ({
   emptyText = "",
+  isFetching = false,
   isLoading = false,
   notes = [],
   onArchive = () => null,
   onDelete = () => null,
   onUnarchive = () => null,
 }) => {
-  const navigate = useNavigate();
+  const { t } = useTranslation("translation", {
+    keyPrefix: "components.notes",
+  });
 
+  const navigate = useNavigate();
   const handleNoteClick = useCallback((id: string) => {
     navigate(`/notes/${id}`);
   }, []);
 
   return (
     <>
-      {isLoading ? (
-        <p className="Caption">Sedang memuat...</p>
+      {isFetching ? (
+        <p className="Caption">{t("loading")}</p>
       ) : notes.length < 1 ? (
         <p className="Caption">{emptyText}</p>
       ) : (
@@ -47,45 +52,53 @@ const Notes: FC<Partial<NotesProps>> = ({
                 </div>
 
                 <div className="Note-actions">
-                  {!note.archived && (
-                    <button
-                      id="BtnArchive"
-                      className="Note-action"
-                      type="button"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        onArchive(note.id);
-                      }}
-                    >
-                      Arsipkan
+                  {isLoading ? (
+                    <button className="Note-action" disabled type="button">
+                      {t("loading")}
                     </button>
-                  )}
+                  ) : (
+                    <>
+                      {!note.archived && (
+                        <button
+                          id="BtnArchive"
+                          className="Note-action"
+                          type="button"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            onArchive(note.id);
+                          }}
+                        >
+                          {t("button.archive")}
+                        </button>
+                      )}
 
-                  {note.archived && (
-                    <button
-                      id="BtnUnarchive"
-                      className="Note-action"
-                      type="button"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        onUnarchive(note.id);
-                      }}
-                    >
-                      Batal arsip
-                    </button>
-                  )}
+                      {note.archived && (
+                        <button
+                          id="BtnUnarchive"
+                          className="Note-action"
+                          type="button"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            onUnarchive(note.id);
+                          }}
+                        >
+                          {t("button.unarchive")}
+                        </button>
+                      )}
 
-                  <button
-                    id="BtnDelete"
-                    className="Note-action"
-                    type="button"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      onDelete(note.id);
-                    }}
-                  >
-                    Hapus
-                  </button>
+                      <button
+                        id="BtnDelete"
+                        className="Note-action"
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          onDelete(note.id);
+                        }}
+                      >
+                        {t("button.delete")}
+                      </button>
+                    </>
+                  )}
                 </div>
               </div>
             );
