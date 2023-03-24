@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { ChangeEvent, ChangeEventHandler, FC, useEffect } from "react";
+import { ChangeEvent, ChangeEventHandler, forwardRef, useEffect } from "react";
 
 import "./textarea.component.scss";
 
@@ -16,56 +16,63 @@ interface TextAreaProps {
   value: string;
 }
 
-const TextArea: FC<Partial<TextAreaProps>> = ({
-  autoCapitalize = "",
-  autoComplete = "",
-  className = "",
-  disabled = false,
-  id = "",
-  name = "",
-  onChange = () => {},
-  placeholder = "",
-  readOnly = false,
-  value = "",
-}) => {
-  useEffect(() => {
-    handleAutoResize();
-  }, []);
+const TextArea = forwardRef<HTMLTextAreaElement, Partial<TextAreaProps>>(
+  (
+    {
+      autoCapitalize = "",
+      autoComplete = "",
+      className = "",
+      disabled = false,
+      id = "",
+      name = "",
+      onChange = () => {},
+      placeholder = "",
+      readOnly = false,
+      value = "",
+    },
+    ref
+  ) => {
+    useEffect(() => {
+      handleAutoResize();
+    }, []);
 
-  function handleAutoResize(): void {
-    const elements = document.querySelectorAll<HTMLTextAreaElement>("textarea");
-    const equalizingNumber = 2;
+    function handleAutoResize(): void {
+      const elements =
+        document.querySelectorAll<HTMLTextAreaElement>("textarea");
+      const equalizingNumber = 2;
 
-    elements.forEach((element) => {
-      element.style.resize = "none";
-      element.style.height = "auto";
-      element.style.height = `${element?.scrollHeight + equalizingNumber}px`;
-    });
+      elements.forEach((element) => {
+        element.style.resize = "none";
+        element.style.height = "auto";
+        element.style.height = `${element?.scrollHeight + equalizingNumber}px`;
+      });
+    }
+
+    function handleOnChange(event: ChangeEvent<HTMLTextAreaElement>): void {
+      handleAutoResize();
+      onChange(event);
+    }
+
+    return (
+      <div className={className}>
+        <textarea
+          ref={ref}
+          id={id}
+          autoCapitalize={autoCapitalize}
+          autoComplete={autoComplete}
+          className="TextArea-input"
+          disabled={disabled}
+          name={name}
+          placeholder={placeholder}
+          readOnly={readOnly}
+          title={placeholder}
+          value={value}
+          onChange={handleOnChange}
+        />
+      </div>
+    );
   }
-
-  function handleOnChange(event: ChangeEvent<HTMLTextAreaElement>): void {
-    handleAutoResize();
-    onChange(event);
-  }
-
-  return (
-    <div className={className}>
-      <textarea
-        id={id}
-        autoCapitalize={autoCapitalize}
-        autoComplete={autoComplete}
-        className="TextArea-input"
-        disabled={disabled}
-        name={name}
-        placeholder={placeholder}
-        readOnly={readOnly}
-        title={placeholder}
-        value={value}
-        onChange={handleOnChange}
-      />
-    </div>
-  );
-};
+);
 
 TextArea.propTypes = {
   autoCapitalize: PropTypes.string,
