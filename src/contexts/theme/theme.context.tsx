@@ -33,13 +33,13 @@ export const ThemeProvider: FC<PropsWithChildren> = ({ children }) => {
     if (!theme) {
       const darkTheme = window.matchMedia("(prefers-color-scheme: dark)");
       setTheme(darkTheme.matches ? "dark" : "light");
+    } else {
+      const root = window.document.documentElement;
+      root.classList.remove(isDarkMode ? "light" : "dark");
+      root.classList.add(theme);
+
+      ls.set(MYN_THEME, theme);
     }
-
-    const root = window.document.documentElement;
-    root.classList.remove(isDarkMode ? "light" : "dark");
-    root.classList.add(theme);
-
-    ls.set(MYN_THEME, theme);
   }, [theme, window]);
 
   function toggleMode(): void {
