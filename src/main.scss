@@ -21,6 +21,8 @@
   @apply bg-white dark:bg-black cursor-pointer mb-bs;
   @apply rounded-xs transition duration-300;
 
+  -webkit-tap-highlight-color: transparent;
+
   &:hover {
     @apply drop-shadow-md;
 

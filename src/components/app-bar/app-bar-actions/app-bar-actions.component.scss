@@ -2,7 +2,7 @@
   @apply flex justify-end;
 
   &-button {
-    @apply dark:text-white px-xs py-2xs w-8;
+    @apply flex items-center justify-center dark:text-white h-8 w-8;
 
     -webkit-tap-highlight-color: transparent;
 
