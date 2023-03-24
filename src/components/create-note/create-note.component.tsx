@@ -19,7 +19,7 @@ interface CreateNoteProps {
   onClose(note: Pick<Note, "body" | "title">): void;
 }
 
-const CreateNote: FC<CreateNoteProps> = ({ onClose = () => null }) => {
+const CreateNote: FC<CreateNoteProps> = ({ onClose }) => {
   const { t } = useTranslation("translation", {
     keyPrefix: "components.create_note",
   });

@@ -111,6 +111,8 @@ const Notes: FC<Partial<NotesProps>> = ({
 
 Notes.propTypes = {
   emptyText: PropTypes.string,
+  isFetching: PropTypes.bool,
+  isLoading: PropTypes.bool,
   notes: PropTypes.array,
   onArchive: PropTypes.func,
   onDelete: PropTypes.func,
