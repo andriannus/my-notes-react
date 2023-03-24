@@ -53,6 +53,22 @@
             "delete": "Note deleted successfully"
           }
         },
+        "create": {
+          "page": {
+            "title": "Create your new note - myNotes"
+          },
+          "app_bar": {
+            "title": "Create note"
+          },
+          "form": {
+            "title": "Title",
+            "body": "Create note...",
+            "button": {
+              "loading": "Loading...",
+              "text": "Save"
+            }
+          }
+        },
         "detail": {
           "page": {
             "title": "Note not found"

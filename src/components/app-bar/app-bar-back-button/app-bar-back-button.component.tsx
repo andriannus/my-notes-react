@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import PropTypes from "prop-types";
-import { FC, memo, useMemo } from "react";
+import { FC, useMemo } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import "./app-bar-back-button.component.scss";
@@ -56,4 +56,4 @@ AppBarBackButton.propTypes = {
   replace: PropTypes.bool,
 };
 
-export default memo(AppBarBackButton);
+export default AppBarBackButton;

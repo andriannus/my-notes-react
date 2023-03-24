@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { FC, memo, PropsWithChildren } from "react";
+import { FC, PropsWithChildren } from "react";
 
 import "./app-bar-brand.component.scss";
 
@@ -11,4 +11,4 @@ AppBarBrand.propTypes = {
   children: PropTypes.node,
 };
 
-export default memo(AppBarBrand);
+export default AppBarBrand;

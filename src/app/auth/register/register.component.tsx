@@ -3,9 +3,7 @@ import { Helmet } from "react-helmet-async";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
-import { AppBar, Button, TextField } from "@/components";
-
-import { AuthLayout } from "../components";
+import { AppBar, Button, Scaffold, TextField } from "@/components";
 
 import { useRegister } from "./register.hook";
 
@@ -35,8 +33,8 @@ const Register: FC = () => {
       </AppBar>
 
       <form onSubmit={handleSubmit(handleRegisterFormSubmit)}>
-        <AuthLayout>
-          <AuthLayout.Body>
+        <Scaffold>
+          <Scaffold.Body>
             <TextField
               id="TxtName"
               autoCapitalize="off"
@@ -78,9 +76,9 @@ const Register: FC = () => {
                 {t("caption.link")}
               </Link>
             </span>
-          </AuthLayout.Body>
+          </Scaffold.Body>
 
-          <AuthLayout.Footer>
+          <Scaffold.Footer>
             <Button
               id="BtnClose"
               color="primary"
@@ -90,8 +88,8 @@ const Register: FC = () => {
             >
               {isLoading ? t("form.button.loading") : t("form.button.text")}
             </Button>
-          </AuthLayout.Footer>
-        </AuthLayout>
+          </Scaffold.Footer>
+        </Scaffold>
       </form>
     </>
   );

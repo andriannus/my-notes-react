@@ -61,6 +61,7 @@ const Archives: FC = () => {
       <AppBar>
         <AppBar.BackButton href="/notes" />
         <AppBar.Title>{t("app_bar.title")}</AppBar.Title>
+        <AppBar.Actions />
       </AppBar>
 
       <main className="Container">

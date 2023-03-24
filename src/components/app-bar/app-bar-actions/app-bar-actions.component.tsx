@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { FC, memo, useEffect, useMemo, useState } from "react";
+import { FC, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
@@ -92,4 +92,4 @@ const AppBarActions: FC = () => {
   );
 };
 
-export default memo(AppBarActions);
+export default AppBarActions;

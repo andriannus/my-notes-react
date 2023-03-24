@@ -76,7 +76,7 @@ const Home: FC = () => {
       </AppBar>
 
       <main className="Container">
-        <CreateNote onClose={handleNoteCreate} />
+        <CreateNote />
 
         <Notes
           emptyText={t<string>("notes.empty_text")}

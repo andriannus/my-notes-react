@@ -44,6 +44,7 @@ const Detail: FC = () => {
       <AppBar>
         <AppBar.BackButton />
         <AppBar.Title>{note?.title}</AppBar.Title>
+        <AppBar.Actions />
       </AppBar>
 
       <main className="Container">

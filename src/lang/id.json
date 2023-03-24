@@ -53,6 +53,22 @@
             "delete": "Catatan berhasil dihapus"
           }
         },
+        "create": {
+          "page": {
+            "title": "Buat catatan barumu - myNotes"
+          },
+          "app_bar": {
+            "title": "Buat catatan"
+          },
+          "form": {
+            "title": "Judul",
+            "body": "Buat catatan...",
+            "button": {
+              "loading": "Sedang memuat...",
+              "text": "Simpan"
+            }
+          }
+        },
         "detail": {
           "page": {
             "title": "Catatan tidak ditemukan"
