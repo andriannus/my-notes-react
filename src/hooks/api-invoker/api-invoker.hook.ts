@@ -63,6 +63,10 @@ export function useAPIInvoker(
       navigate("/login");
     }
 
+    if (err.response?.status === HTTP_STATUS_CODES.FORBIDDEN) {
+      navigate("/notes");
+    }
+
     return Promise.reject(err);
   }
 
