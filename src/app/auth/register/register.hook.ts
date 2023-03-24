@@ -15,7 +15,9 @@ export function useRegister() {
   const { apiInvoker } = useAPIInvoker();
   const navigate = useNavigate();
 
-  const { t } = useTranslation("translation", { keyPrefix: "app.register" });
+  const { t } = useTranslation("translation", {
+    keyPrefix: "app.auth.register",
+  });
 
   const { formState, handleSubmit, register, watch } = useForm<RegisterForm>({
     mode: "onChange",
