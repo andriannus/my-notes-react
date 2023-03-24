@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
 import { Masonry } from "@/components";
-import { truncate } from "@/utils";
+import { transformToIDFormat, truncate } from "@/utils";
 
 import { NotesProps } from "./notes.model";
 
@@ -48,7 +48,11 @@ const Notes: FC<Partial<NotesProps>> = ({
                 )}
 
                 <div className="Note-content">
-                  <span>{truncate(note.body, 50)}</span>
+                  <p>{truncate(note.body, 50)}</p>
+
+                  <span className="Note-createdAt">
+                    {transformToIDFormat(new Date(note.createdAt))}
+                  </span>
                 </div>
 
                 <div className="Note-actions">
